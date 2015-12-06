@@ -4,10 +4,21 @@ public class Main {
 	public static Scanner input = new Scanner(System.in);
 	public static char[][] board = new char[3][3];
 	public static char turn = 'X';
-	
+	public static int chose;
 	public static void main(String[] args) {
+	Main CPUro = new Main();
+	Main CPUcl = new Main();
+		
 		startboardvalue();
-		play();
+		System.out.println("=============\n" +
+							" TIC TAC TOE\n" +
+						   "=============");
+		Playboard();
+		System.out.println("1.Player vs Player\n"+"2.Computer vs Computer");
+		chose = input.nextInt();
+		if (chose == 1) 
+			PVP();
+		else CVC();
 	}
 	
 	public static void startboardvalue(){
@@ -17,29 +28,49 @@ public class Main {
 			}
 		}
 	}
-	public static void play(){
+	
+	
+	public static int  playerro(){
+		System.out.println("Input row    :");
+		ro = input.nextInt() - 1;
+		return ro;
+	}
+	public static int  playercl(){
+		System.out.println("Input column :");
+		cl = input.nextInt() - 1;
+		return cl;
+	}
+	
+
+	public static void PVP(){
 		boolean playing = true;
 		
 		while (playing) {
-			System.out.println("Input row    :");
-			ro = input.nextInt() - 1;
-			System.out.println("Input column :");
-			cl = input.nextInt() - 1;
+			playerro();playercl();
 			
+			
+			if ( board [ro][cl] != 'X'&& board [ro][cl] != 'O')
 			board[ro][cl] = turn;
-			System.out.println(board [ro][cl]); // debugg
+			if ( board [ro][cl] == 'X' && board [ro][cl] =='O'){
+				System.out.println("Slot already taken ,please chose another slot");
+				playerro();playercl();
+			}
+			//System.out.println(board [ro][cl]); // debugg
 			
 			if (GameOver(ro,cl)){
 				playing = false;
-				System.out.println("Player "+ turn +" win!");
+				
 			}
 			Playboard();
+			System.out.println("Player "+ turn +" win!");
 			if (turn == 'X')
 				turn = 'O';
 			else turn = 'X';	
 		}
 	}
 	
+	public static void CVC(){
+	}
 	
 	public static void Playboard(){
 		for (int i = 0 ; i < 3; i++) {
@@ -50,6 +81,7 @@ public class Main {
 				System.out.print(board[i][j] + " | " ) ;
 			}
 		}
+		System.out.println();
 		System.out.println();
 	}
 	
