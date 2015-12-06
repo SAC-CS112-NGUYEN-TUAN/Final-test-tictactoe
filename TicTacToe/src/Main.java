@@ -6,8 +6,7 @@ public class Main {
 	public static char turn = 'X';
 	public static int chose;
 	public static void main(String[] args) {
-	Main CPUro = new Main();
-	Main CPUcl = new Main();
+
 		
 		startboardvalue();
 		System.out.println("=============\n" +
@@ -29,7 +28,18 @@ public class Main {
 		}
 	}
 	
-	
+	public static int random(){
+		int result = 0 + (int) (Math.random()*3);
+		return result;
+	}
+	public static int computerro(){
+		ro = random();
+		return ro;
+	}
+		public static int computercl(){
+		cl = random();
+		return cl;	
+	}
 	public static int  playerro(){
 		System.out.println("Input row    :");
 		ro = input.nextInt() - 1;
@@ -59,10 +69,10 @@ public class Main {
 			
 			if (GameOver(ro,cl)){
 				playing = false;
-				
+				System.out.println("Player "+ turn +" win!");
 			}
 			Playboard();
-			System.out.println("Player "+ turn +" win!");
+			
 			if (turn == 'X')
 				turn = 'O';
 			else turn = 'X';	
@@ -70,7 +80,34 @@ public class Main {
 	}
 	
 	public static void CVC(){
+	boolean playing = true;
+		
+		while (playing) {
+		computerro();computercl();
+			
+			
+			if ( board [ro][cl] != 'X'&& board [ro][cl] != 'O')
+			board[ro][cl] = turn;
+			if ( board [ro][cl] == 'X' && board [ro][cl] =='O'){
+				System.out.println("Slot already taken ,please chose another slot");
+				playerro();playercl();
+			}
+			//System.out.println(board [ro][cl]); // debugg
+			
+			if (GameOver(ro,cl)){
+				playing = false;
+				System.out.println("Player "+ turn +" win!");
+			}
+			Playboard();
+			
+			if (turn == 'X')
+				turn = 'O';
+			else turn = 'X';	
+		}
 	}
+	
+	
+	
 	
 	public static void Playboard(){
 		for (int i = 0 ; i < 3; i++) {
