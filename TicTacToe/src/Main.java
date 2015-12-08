@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class Main {
 	public static int ro, cl;
@@ -6,18 +7,33 @@ public class Main {
 	public static char turn = 'X';
 	public static int chose;
 	public static void main(String[] args) {
-
+	boolean continueLoop = true;	
 		
 		startboardvalue();
 		System.out.println("=============\n" +
 							" TIC TAC TOE\n" +
 						   "=============");
 		Playboard();
+		do{	
+			try{
 		System.out.println("1.Player vs Player\n"+"2.Computer vs Computer");
-		chose = input.nextInt();
-		if (chose == 1) 
+		
+			chose = input.nextInt();
+			if (chose == 1) 
 			PVP();
-		else CVC();
+			if ( chose == 2)CVC();
+			if (chose >=1 && chose <3)continueLoop = false;
+			else{
+			System.out.println("Only Accept 1-2");
+			input.nextLine();
+			}
+			} catch(InputMismatchException inputMismatchException){
+				System.err.printf("\nException: %s\n", inputMismatchException);
+				input.nextLine();
+				System.out.println("you must enter intergers 1-2, please try again:");
+			
+			}
+		}while(continueLoop);
 	}
 	
 	public static void startboardvalue(){
@@ -41,6 +57,7 @@ public class Main {
 		return cl;	
 	}
 	public static int  playerro(){
+		
 		System.out.println("Input row    :");
 		ro = input.nextInt() - 1;
 		return ro;
