@@ -8,7 +8,9 @@ public class Main {
 	public static int chose;
 	public static void main(String[] args) {
 	boolean continueLoop = true;	
-		
+	boolean continuegame = true;
+	
+	do{
 		startboardvalue();
 		System.out.println("=============\n" +
 							" TIC TAC TOE\n" +
@@ -34,7 +36,14 @@ public class Main {
 			
 			}
 		}while(continueLoop);
+	
+	System.out.println("Do you want to play again ?\n"
+			+ "1.YES 2.NO ");
+	int again = input.nextInt();
+	if(again == 2)continuegame = false;
+	}while (continuegame);
 	}
+	
 	
 	public static void startboardvalue(){
 		for (int i = 0 ; i < 3; i++) {
@@ -57,19 +66,47 @@ public class Main {
 		return cl;	
 	}
 	public static int  playerro(){
+		boolean rloop = true;
 		
-		System.out.println("Input row    :");
-		ro = input.nextInt() - 1;
+		do{
+			try{
+		
+			System.out.println("Input row    :");
+			ro = input.nextInt() - 1;
+			if (ro >= 0 && ro <=2)rloop = false;
+			else {System.out.println("you must enter 1-3, please try again:");
+			input.nextLine();
+			}
+			}catch(InputMismatchException inputMismatchException){System.err.printf("\nException: %s\n", inputMismatchException);
+			input.nextLine();
+			System.out.println("you must enter intergers 1-3, please try again:");
+			
+		}
+		}
+		while(rloop);
 		return ro;
 	}
 	public static int  playercl(){
-		System.out.println("Input column :");
-		cl = input.nextInt() - 1;
+boolean cloop = true;
+		
+		do{
+			try{
+		
+			System.out.println("Input column    :");
+			cl = input.nextInt() - 1;
+			if (cl >= 0 && cl <=2)cloop = false;
+			else {System.out.println("you must enter 1-3, please try again:");
+			input.nextLine();
+			}
+			}catch(InputMismatchException inputMismatchException){System.err.printf("\nException: %s\n", inputMismatchException);
+			input.nextLine();
+			System.out.println("you must enter intergers 1-3, please try again:");
+			
+		}
+		}
+		while(cloop);
 		return cl;
-	}
-	
-
-
+	}	
 	public static void PVP(){
 		boolean playing = true;
 		boolean samespot = true;
