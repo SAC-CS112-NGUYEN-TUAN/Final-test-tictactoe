@@ -52,19 +52,28 @@ public class Main {
 	}
 	
 
+
 	public static void PVP(){
 		boolean playing = true;
-		
+		boolean samespot = true;
 		while (playing) {
 			playerro();playercl();
 			
 			
-			if ( board [ro][cl] != 'X'&& board [ro][cl] != 'O')
-			board[ro][cl] = turn;
-			if ( board [ro][cl] == 'X' && board [ro][cl] =='O'){
-				System.out.println("Slot already taken ,please chose another slot");
-				playerro();playercl();
-			}
+			if ( board [ro][cl] == '_')
+				board[ro][cl] = turn;
+				else if ( board [ro][cl] != '_'){
+					while(samespot){
+						System.out.println("Slot is taken , Pls choose another ");
+						playerro();playercl();
+						if ( board [ro][cl] == '_'){
+							board[ro][cl] = turn;
+							samespot = false;
+						}	
+					}
+				samespot =true;
+					
+				}
 			//System.out.println(board [ro][cl]); // debugg
 			
 			if (GameOver(ro,cl)){
@@ -81,23 +90,31 @@ public class Main {
 	
 	public static void CVC(){
 	boolean playing = true;
-		
+	boolean samespot = true;	
 		while (playing) {
 		computerro();computercl();
 			
 			
-			if ( board [ro][cl] != 'X'&& board [ro][cl] != 'O')
+			if ( board [ro][cl] == '_')
 			board[ro][cl] = turn;
-			if ( board [ro][cl] == 'X' && board [ro][cl] =='O'){
-				System.out.println("Slot already taken ,please chose another slot");
-				playerro();playercl();
+			else if ( board [ro][cl] != '_'){
+				while(samespot){
+					computerro();computercl();
+					if ( board [ro][cl] == '_'){
+						board[ro][cl] = turn;
+						samespot = false;
+					}	
+				}
+			samespot =true;
 			}
+			
 			//System.out.println(board [ro][cl]); // debugg
 			
 			if (GameOver(ro,cl)){
 				playing = false;
 				System.out.println("Player "+ turn +" win!");
 			}
+			System.out.println("Computer play "+turn );
 			Playboard();
 			
 			if (turn == 'X')
@@ -105,7 +122,6 @@ public class Main {
 			else turn = 'X';	
 		}
 	}
-	
 	
 	
 	
