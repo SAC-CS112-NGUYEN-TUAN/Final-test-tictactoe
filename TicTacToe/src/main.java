@@ -18,14 +18,13 @@ public class main {
 		Playboard();
 		do{	
 			try{
-		System.out.println("1.Player vs Player\n2.Computer vs Computer\n3.Player vs Computer");
+		System.out.println("1.Player vs Player\n2.Player vs Computer\n3.Computer vs Computer");
 		
 			chose = input.nextInt();
-			if (chose == 1) 
-			PVP();
-			if ( chose == 2)CVC();
-			if ( chose == 3)PVC();
-			if (chose >=1 && chose <=3)continueLoop = false;
+			if ( chose == 1)PVP();
+			if ( chose == 2)PVC();
+			if ( chose == 3)CVC();
+			if ( chose >=1 && chose <=3)continueLoop = false;
 			else{
 			System.out.println("Only Accept 1-3");
 			input.nextLine();
@@ -179,22 +178,23 @@ boolean cloop = true;
 	}
 	public static void PVC() {
 		boolean playing = true;
-		boolean samespot = true;
+		boolean samespotplayer = true;
+		boolean samespotcomputer = true;
 		while (playing){
 			if (turn == 'X'){
 			playerro();playercl();
 			if ( board [ro][cl] == '_')
 				board[ro][cl] = turn;
 				else if ( board [ro][cl] != '_'){
-				while(samespot){
+				while(samespotplayer){
 					System.out.println("Slot is taken , Pls choose another ");
 					playerro();playercl();
 					if ( board [ro][cl] == '_'){
 						board[ro][cl] = turn;
-						samespot = false;
+						samespotplayer = false;
 					}	
 				}
-				samespot =true;
+				samespotplayer = true;
 			}
 			if (GameOver(ro,cl)){
 				playing = false;
@@ -211,15 +211,14 @@ boolean cloop = true;
 			if ( board [ro][cl] == '_')
 				board[ro][cl] = turn;
 				else if ( board [ro][cl] != '_'){
-				while(samespot){
-					System.out.println("Slot is taken , Pls choose another ");
-					playerro();playercl();
+				while(samespotcomputer){
+					computerro();computercl();
 					if ( board [ro][cl] == '_'){
 						board[ro][cl] = turn;
-						samespot = false;
+						samespotcomputer = false;
 					}	
 				}
-				samespot =true;
+				samespotcomputer =true;
 			}
 			if (GameOver(ro,cl)){
 				playing = false;
