@@ -9,13 +9,18 @@ public class main {
 	public static void main(String[] args) {
 	boolean continueLoop = true;	
 	boolean continuegame = true;
-	
+	GameOver board = new GameOver();
+	GameOver checkwin = new GameOver();
+	GameOver Startvalue = new GameOver();
 	do{
+		
 		startboardvalue();
+		board.Playboard();	
+		
+		System.out.println();
 		System.out.println("=============\n" +
 							" TIC TAC TOE\n" +
 						   "=============");
-		Playboard();
 		do{	
 			try{
 		System.out.println("1.Player vs Player\n2.Player vs Computer\n3.Computer vs Computer");
@@ -143,38 +148,38 @@ boolean cloop = true;
 	}
 	
 	public static void CVC(){
-	boolean playing = true;
-	boolean samespot = true;	
-		while (playing) {
-		computerro();computercl();
-			
-			
-			if ( board [ro][cl] == '_')
-			board[ro][cl] = turn;
-			else if ( board [ro][cl] != '_'){
-				while(samespot){
-					computerro();computercl();
-					if ( board [ro][cl] == '_'){
-						board[ro][cl] = turn;
-						samespot = false;
-					}	
+		boolean playing = true;
+		boolean samespot = true;	
+			while (playing) {
+			computerro();computercl();
+				
+				
+				if ( board [ro][cl] == '_')
+				board[ro][cl] = turn;
+				else if ( board [ro][cl] != '_'){
+					while(samespot){
+						computerro();computercl();
+						if ( board [ro][cl] == '_'){
+							board[ro][cl] = turn;
+							samespot = false;
+						}	
+					}
+				samespot =true;
 				}
-			samespot =true;
+				
+				//System.out.println(board [ro][cl]); // debugg
+				
+				if (GameOver(ro,cl)){
+					playing = false;
+					System.out.println("Player "+ turn +" win!");
+				}
+				System.out.println("Computer play "+turn );
+				Playboard();
+				
+				if (turn == 'X')
+					turn = 'O';
+				else turn = 'X';	
 			}
-			
-			//System.out.println(board [ro][cl]); // debugg
-			
-			if (GameOver(ro,cl)){
-				playing = false;
-				System.out.println("Player "+ turn +" win!");
-			}
-			System.out.println("Computer play "+turn );
-			Playboard();
-			
-			if (turn == 'X')
-				turn = 'O';
-			else turn = 'X';	
-		}
 	}
 	public static void PVC() {
 		boolean playing = true;
